@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>3 Layer Surprise ✨</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{height:100vh;overflow:hidden;font-family:Arial,sans-serif;color:white;background:#080014}
+.page{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;
+padding:22px;opacity:0;visibility:hidden;transform:translateY(25px) scale(.98);
+transition:opacity .9s ease,transform .9s ease,visibility .9s}
+.page.active{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.bg{position:absolute;inset:0;z-index:-2;overflow:hidden;
+background:linear-gradient(135deg,#16002f,#39005c,#071b46,#120021);background-size:300% 300%;
+animation:bg 10s ease infinite}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.glow{position:absolute;border-radius:50%;filter:blur(55px);opacity:.55;animation:move 7s infinite alternate}
+.g1{width:260px;height:260px;background:#ff3cac;top:-70px;left:-60px}
+.g2{width:280px;height:280px;background:#4776e6;right:-80px;bottom:-70px;animation-delay:2s}
+@keyframes move{to{transform:translate(45px,-30px) scale(1.15)}}
+.card{width:min(650px,94vw);padding:48px 28px;text-align:center;border-radius:30px;
+background:#ffffff13;border:1px solid #ffffff2e;backdrop-filter:blur(18px);
+box-shadow:0 25px 80px #0009}
+.icon{font-size:3.5rem;margin-bottom:14px;animation:pulse 1.7s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+h1{font-size:clamp(2.5rem,9vw,5rem);margin-bottom:16px}
+h2{font-size:clamp(2rem,7vw,3.5rem);margin-bottom:15px}
+p{font-size:clamp(1rem,3.5vw,1.25rem);line-height:1.6;color:#eee}
+.gradient{background:linear-gradient(90deg,#ff8bd1,#c4b5fd,#67e8f9,#ff8bd1);
+background-size:250%;-webkit-background-clip:text;background-clip:text;color:transparent;
+animation:shine 4s linear infinite}
+@keyframes shine{to{background-position:250%}}
+button{margin-top:28px;padding:15px 30px;border:0;border-radius:50px;
+font-weight:bold;font-size:1rem;color:#190021;background:#fff;cursor:pointer;
+transition:.3s;box-shadow:0 10px 35px #0006}
+button:hover{transform:translateY(-3px) scale(1.04)}
+.dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+.dot{width:8px;height:8px;border-radius:10px;background:#ffffff55;transition:.4s}
+.dot.active{width:25px;background:#fff}
+</style>
+</head>
+<body>
+
+<div class="bg"><div class="glow g1"></div><div class="glow g2"></div></div>
+
+<section class="page active">
+ <div class="card">
+  <div class="icon">✨</div>
+  <h1 class="gradient">Hey You!</h1>
+  <p>Something special is waiting for you. Just take one little step...</p>
+  <button onclick="next()">ENTER ✨</button>
+ </div>
+</section>
+
+<section class="page">
+ <div class="card">
+  <div class="icon">🎁</div>
+  <h2>One More Step</h2>
+  <p>You're getting closer. Keep going, because the best part is behind this button.</p>
+  <button onclick="next()">CLICK HERE 💫</button>
+ </div>
+</section>
+
+<section class="page">
+ <div class="card">
+  <div class="icon">💖</div>
+  <h1 class="gradient">SURPRISE!</h1>
+  <p><strong>[YOUR SURPRISE MESSAGE HERE]</strong></p>
+  <p style="margin-top:10px;font-size:.9rem">Edit this message inside the HTML file.</p>
+  <button onclick="restart()">↻ AGAIN</button>
+ </div>
+</section>
+
+<div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+
+<script>
+let n=0;
+const pages=document.querySelectorAll('.page');
+const dots=document.querySelectorAll('.dot');
+
+function show(i){
+ n=i;
+ pages.forEach((p,x)=>p.classList.toggle('active',x===i));
+ dots.forEach((d,x)=>d.classList.toggle('active',x===i));
+}
+function next(){if(n<2)show(n+1)}
+function restart(){show(0)}
+</script>
+</body>
+</html>
